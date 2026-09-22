@@ -1,0 +1,47 @@
+# Optional: open in an editor HTTP client that supports .http files.
+# These requests are separate examples; no response-token automation is assumed.
+# Keep this committed placeholder. Do not save real tokens back to this file.
+@baseUrl = http://127.0.0.1:3000
+@token = PASTE_DEMO_TOKEN_LOCALLY_WITHOUT_QUOTES
+
+### Public activity list -> 200
+GET {{baseUrl}}/api/activities
+
+### Missing credentials -> 401
+GET {{baseUrl}}/api/auth/me
+
+### Login as student -> 200 after TODOs 1 and 2
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{"username":"alice","password":"StudentPass!23"}
+
+### Invalid password -> 401
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{"username":"alice","password":"WrongPassword"}
+
+### Missing password -> 400
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{"username":"alice"}
+
+### Current account -> 200 after all TODOs
+GET {{baseUrl}}/api/auth/me
+Authorization: Bearer {{token}}
+
+### Malformed token -> 401
+GET {{baseUrl}}/api/auth/me
+Authorization: Bearer not-a-jwt
+
+### Student token -> 403; organiser token -> 200
+GET {{baseUrl}}/api/staff/summary
+Authorization: Bearer {{token}}
+
+### Login as organiser -> 200 after TODOs 1 and 2
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{"username":"morgan","password":"OrganiserPass!23"}

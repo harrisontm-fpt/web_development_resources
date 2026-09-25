@@ -1,0 +1,26 @@
+@baseUrl = http://127.0.0.1:3000
+@activityId = 1
+
+### List activities
+GET {{baseUrl}}/api/activities
+
+### Read one (replace activityId with the ID returned by POST)
+GET {{baseUrl}}/api/activities/{{activityId}}
+
+### Create an activity
+POST {{baseUrl}}/api/activities
+Content-Type: application/json
+
+{"title":"Campus coding club","details":"Bring a laptop to Room B."}
+
+### Invalid input: 400
+POST {{baseUrl}}/api/activities
+Content-Type: application/json
+
+{"title":"   ","details":"Bring a laptop to Room B."}
+
+### Valid ID, absent on a fresh exercise database: 404
+GET {{baseUrl}}/api/activities/2147483647
+
+### Invalid ID: 400
+GET {{baseUrl}}/api/activities/abc

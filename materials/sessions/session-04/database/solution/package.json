@@ -1,0 +1,18 @@
+{
+  "name": "session-04-database-solution",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24 <25" },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "setup": "node scripts/setup-env.js",
+    "db:check": "node scripts/check-db.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
+    "test:db": "node test/database.integration.js"
+  },
+  "dependencies": { "dotenv": "^17.0.0", "express": "^5.0.0", "mysql2": "^3.0.0" },
+  "devDependencies": { "jest": "^30.0.0", "supertest": "^7.0.0" },
+  "jest": { "testEnvironment": "node", "transform": {}, "testMatch": ["**/test/activities.test.js", "**/test/config.test.js"] }
+}
